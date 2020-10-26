@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhiteBoard</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        html, body{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- drawing board -->
+    <div class="tool-bar">
+        <div class="hamburger"></div>
+        <div class="tool-panel">
+            <div class="tool">
+                <img src="./NewIcons/Black_Pencil.svg" alt="" class="tool-img" id="pencil"
+                    onclick="handleTool('pencil')">
+                <div class="tool-options" id="pencil-options">
+                    <div class="slider">
+                        <input type="range" max='50' min='4' value='5' step='1'>
+                    </div>
+                    <div class="colors">
+                        <div class="color red" onclick="changeColor('red')"></div>
+                        <div class="color green" onclick="changeColor('green')"></div>
+                        <div class="color blue" onclick="changeColor('blue')"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/Eraser.svg" alt="" class="tool-img" id="eraser" onclick="handleTool('eraser')">
+                <div class="tool-options" id="eraser-options">
+                    <div class="slider">
+                        <input type="range" name="" max='50' min='4' value='5' step='1'>
+                    </div>
+                </div>
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/StickyNote.svg" alt="" class="tool-img" id="sticky" onclick="handleTool('sticky')">
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/Photo.svg" alt="" class="tool-img" id="upload" onclick="handleTool('upload')">
+                <input type="file" id="acceptImg" style="display: none;">
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/Undo.svg" class="tool-img" onclick="handleTool('undo')">
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/Redo.svg" class="tool-img" onclick="handleTool('redo')">
+            </div>
+            <div class="tool">
+                <img src="./NewIcons/Download.svg" class="tool-img" onclick="handleTool('download')">
+            </div>
+        </div>
+    </div>
+    <canvas class="board"></canvas>
+    <script>
+        let board = document.querySelector(".board");
+        board.height = window.innerHeight;
+        board.width = window.innerWidth;
+        // 2d canvas , 3d canvas, webgl canvas
+        //  tool
+        let ctx = board.getContext("2d");
+        window.addEventListener("resize", function(){
+            board.height = window.innerHeight;
+            board.width = window.innerWidth;
+            /// redraw
+        });
+        console.log(ctx);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+    <script>
+        const socket = io.connect("http://localhost:3000");    
+    </script>
+    <script src="utility.js"></script>
+    <script src="tools.js"></script>
+    <script src="sticky.js"></script>
+    <script src="img.js"></script>
+    <script src="canvas.js"></script>
+    <script src="receiver.js"></script>
+</body>
+</html>
